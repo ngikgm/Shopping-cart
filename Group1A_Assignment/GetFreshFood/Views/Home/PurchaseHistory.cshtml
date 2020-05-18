@@ -1,0 +1,77 @@
+﻿@model GetFreshFood.Models.Num_of_Id
+@using GetFreshFood.Models
+
+@{
+    ViewBag.Title = "PurchaseHistory";
+    Layout = "~/Views/Shared/_ShoppingCartLayout.cshtml";
+    List<Num_of_Id> total_data = (List<Num_of_Id>)ViewBag.Purchased_Products_List;
+    int counter = 0;
+}
+
+<div class="row">
+    @foreach (Num_of_Id product_obj in total_data)
+    {
+    <div class="row">
+        <div class="col-md-6 col-sm-6 text-center">
+            <div class="row">
+                <div class="col-md-6 col-sm-6"></div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="thumbnail">
+                        <img src="~/@product_obj.ProductImagePath" id="specific_products" alt="Image" class="img-rounded" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;" />
+                        <div class="caption">
+                            <h3 id="thumbnail-label">
+                                <label id="product_id_label" class="product_id_label"> @product_obj.ProductName</label>
+                            </h3>
+                            @product_obj.ProductDetails
+                            <br />
+                            <button class="btn btn-primary" style="background-color:#DA81F5;" onclick="">
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+            <div class="col-md-6 col-sm-6 text-center" style="margin-top:10%;">
+                <table class="table-hover">
+                    <tr>
+                        <td>
+                            <label style="float:left;">Purchased Date: </label>
+                        </td>
+                        <td>
+                            @product_obj.ProductPurchasedDate
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="float:left;">Quantity: </label>
+                        </td>
+                        <td>
+                            @product_obj.ProductQuantity
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="float:left;"> Activation Code:</label>
+                        </td>
+                        <td>
+                            @{
+                                List<string> activation_data = product_obj.ProductActivationCode;
+                            }
+                            <select style="width:350px;" >
+                                @foreach (string temp_data in activation_data)
+                                {
+                                    <option value="@temp_data">@temp_data</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        counter++;
+    
+        }
+    </div>

@@ -1,0 +1,133 @@
+﻿
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#7401DF;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                    @using (Html.BeginForm("SearchProduct", "Home", FormMethod.Post, new { @class = "navbar-brand",@style="padding-top:7px;" }))
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    @Html.TextBox("search_box", null, new { @class = "form-control", placeholder = "search", required = "required" })
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-info" style="background-color:#DA81F5;border:none;">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+        </div>
+        <div class="navbar-collapse collapse">
+           <ul class="nav navbar-nav">
+               <li>
+                   <a href="@Url.Action("SearchProduct", "Home")" style="color:white;text-decoration:none;" class="home_link">
+                       Home
+                   </a>
+               </li>
+           </ul>
+            
+            @{
+                string correct_user = (string)Session["Correct_User"];
+                string view_shopping_cart = (string)Session["ShoppingCart"];
+                List<string> shopping_cart_history = (List<string>)Session["history"];
+
+                // Registered User!
+                if (correct_user != null && view_shopping_cart == null)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                         
+                        <li>
+                            <a href="@Url.Action("PurchaseHistory", "Home")">
+                                MyPurchase
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Show_Cart", "Home")">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="badge " id="badge_shopping_cart"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                 Welcome! @correct_user
+                            </a>
+                        </li>
+                        <li>
+                        <li>
+                            <a href="@Url.Action("Logout", "All")">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else if (correct_user != null && view_shopping_cart != null && shopping_cart_history.Count != 0)
+                {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Url.Action("SearchProduct", "Home")">
+                    ContinueShopping
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Buy_Product", "Home")">
+                    <span class="glyphicon glyphicon-briefcase"></span>
+                    Checkout
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Welcome! @correct_user
+                </a>
+            </li>
+            <li>
+            <li>
+                <a href="@Url.Action("Logout", "All")">
+                    Logout
+                </a>
+            </li>
+        </ul>
+                }
+                else if (correct_user != null && view_shopping_cart != null && shopping_cart_history.Count == 0)
+                {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Url.Action("SearchProduct", "Home")">
+                    ContinueShopping
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Welcome! @correct_user
+                </a>
+            </li>
+            <li>
+            <li>
+                <a href="@Url.Action("Logout", "All")">
+                    Logout
+                </a>
+            </li>
+        </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="@Url.Action("SignIn", "All")">
+                                <span class="glyphicon glyphicon-log-in"></span>
+                                SignIn
+                            </a>
+                        </li>
+                    </ul>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+<!-- End of Navigation Bar -->

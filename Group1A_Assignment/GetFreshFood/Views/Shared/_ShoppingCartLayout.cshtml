@@ -1,0 +1,187 @@
+﻿@model GetFreshFood.Models.Customer
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    -->
+
+    <link href="@Url.Content("~/Content/css/Customer.css")" rel="stylesheet" type="text/css" />
+    <style>
+
+        .navbar li a, .navbar .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: black !important;
+            background-color: #fff !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
+    </style>
+
+    <!-- Login Modal -->
+    <script type="text/javascript">
+        var shopping_cart_data = 0;
+
+        function Update_Cart() {
+            var temp_data = { Id: 1 };
+            // Send JSON data to server's controller-action-method
+            $.ajax({
+                        type: "POST",
+                        url: "/Home/UpdateCart",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(temp_data),
+                        dataType: "json",
+
+                        // Response Success
+                        success: function (response) {
+                        document.getElementById("badge_shopping_cart").innerHTML = response.clicked_product_id;
+                        },
+
+                        // Response Fail
+                        failure: function (response) {
+                            alert("Fail Case");
+                        },
+
+                        // Response Error
+                        error: function (response) {
+                            alert("ERROR case");
+                        }
+                    });
+                    
+        }
+
+     
+
+        // SIGN IN
+        function customer_signin() {
+            //alert("SignIn");
+            var login_email_bx = document.getElementById("login_passwd_bx");
+            var login_passwd_bx = document.getElementById("login_passwd_bx");
+        }
+
+    </script>
+
+    <!-- SEARCH Product -->
+    <script>
+       
+        // Adding Product
+        function Add_to_Cart(product_id) {
+            //alert("Add Cart ( Product ID ) ==>" + product_id);
+
+            var customer_data = {
+                Id: product_id
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/AddCart/",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(customer_data),
+                dataType: "json",
+
+                // Response Success
+                success: function (response) {
+                   
+                    if (response.clicked_product_id != 0) {
+                        // alert("Add:-)");
+                        shopping_cart_data = response.clicked_product_id;
+
+                        document.getElementById("badge_shopping_cart").innerHTML = response.clicked_product_id;
+                        //document.getElementById("shopping_cart_label").value = response.clicked_product_id;
+                    }
+
+                    // Already Registered Users
+                    else if (response.clicked_product_id == 0) {
+                        // alert("SignIn...");
+                        document.getElementById("modal-title").innerHTML = "SignIn";
+                        document.getElementById("modal-body").innerHTML = "Please! SignIn";
+                        $('#myModal').modal({
+                            backdrop: 'static'
+                        });
+                    }
+                },
+
+                // Response Fail
+                failure: function (response) {
+                    alert("Fail Case");
+                },
+
+                // Response Error
+                error: function (response) {
+                    alert("ERROR case");
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="Update_Cart()">
+    
+    <div class="container body-content">
+        @{
+            Html.RenderPartial("_Header_Div");
+        }
+
+        @RenderBody()
+
+        <!-- Already Registered User -->
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-sm" style="top:30%;border-radius:25px;-moz-border-radius:10px 10px 10px 10px;-webkit-border-radius:10px;">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="background-color:#FF481C;color:white;">
+                        <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
+                        <h4 class="modal-title" id="modal-title">SignUp User!</h4>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="modal-body" style="color:#FF481C">
+                        Already Registered...
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <!--
+    <div class="row" style="background-color:#FF481C;">
+        <footer style="text-align:center;">
+            <p>&copy; @DateTime.Now.Year - Legal Online Shopping Web System</p>
+        </footer>
+    </div>
+        -->
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

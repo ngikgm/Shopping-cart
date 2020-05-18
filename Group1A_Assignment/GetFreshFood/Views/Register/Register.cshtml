@@ -1,0 +1,46 @@
+﻿@Scripts.Render("~/bundles/jqueryval")
+
+@model GetFreshFood.Models.Customer
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+
+
+<h2>Register</h2>
+@using (Html.BeginForm("RegNewUser", "Register", FormMethod.Post, new { id = "returnForm" }))
+{
+    <table>
+        <tr>
+            <td>@Html.LabelFor(x => x.name):</td>
+            <td>@Html.TextBoxFor(x => x.name, new { })</td>
+            <td>@Html.ValidationMessageFor(x => x.name)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.password):</td>
+            <td>@Html.PasswordFor(x => x.password, new { }) </td>
+            <td>@Html.ValidationMessageFor(x => x.password)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.Confirmpassword):</td>
+            <td>@Html.PasswordFor(x => x.Confirmpassword, new {  })</td>
+            <td>@Html.ValidationMessageFor(x => x.Confirmpassword)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.Emailaddress):</td>
+            <td>@Html.TextBoxFor(x => x.Emailaddress, new { })</td>
+            <td>@Html.ValidationMessageFor(x => x.Emailaddress)</td>
+        </tr>
+
+
+        <tr>
+            <td>By click"Register button" you agree with the <a href="@Url.Action("TnC","Register")">Terms&Conditions.</a></td>
+            <td align="right"><input id="submitBtn" type="submit" value="Register" class="btn btn-default" /></td>
+        </tr>
+    </table>
+}
+
+

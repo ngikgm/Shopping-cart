@@ -1,0 +1,41 @@
+﻿@model GetFreshFood.Models.Product
+@using GetFreshFood.Models
+
+@{
+    ViewBag.Title = "SearchProduct";
+    Layout = "~/Views/Shared/_ShoppingCartLayout.cshtml";
+    List<Product> product_lis = (List<Product>)ViewBag.product_lis;
+
+    string target_data = ViewBag.Search_data;
+    int counter = 0;
+}
+
+<div class="row">
+    @{
+        if (product_lis.Count() > 0)
+        {
+            foreach (Product product_obj in product_lis)
+            {
+                if (counter != 0 && counter % 4 == 0)
+                {
+                @:</div>
+                @:<div class="row">
+                }
+                <div class="col-md-3 col-sm-3 text-center" >
+                    <div class="thumbnail">
+                        <img src="~/@product_obj.image_path" id="specific_products" alt="Image" class="img-rounded" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;" />
+                        <div class="caption">
+                            <h3 id="thumbnail-label" style="font-family:Verdana;"> <span id="product_id_label" class="product_id_label" value="@product_obj.Id"></span>@product_obj.name</h3>
+                            <button class="btn btn-primary" style="background-color:#DA81F5;" onclick="Add_to_Cart(@product_obj.Id)">
+                                @product_obj.price. Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                counter++;
+
+            }
+        }
+    }
+</div>

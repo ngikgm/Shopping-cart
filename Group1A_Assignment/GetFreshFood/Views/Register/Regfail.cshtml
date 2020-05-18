@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Register Fail";
+}
+
+<h2>Register Fail</h2>
+
+<script>
+    alert("User name already exist, please register a new name then try again.");
+</script>
+
+<input type="button" class="btn btn-default" value="Go on register" onclick="location.href='@Url.Action("Register","Register")'" />

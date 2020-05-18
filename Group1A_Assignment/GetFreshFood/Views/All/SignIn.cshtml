@@ -1,0 +1,57 @@
+﻿@Scripts.Render("~/bundles/jqueryval")
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/_ShoppingCartLayout.cshtml";
+}
+<div class="row" style="padding-top:35px;">
+    @using (Html.BeginForm("SignIn", "All", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Name" style="border: none;border-bottom:1px solid #000000;border-radius:0;-webkit-box-shadow: none;box-shadow: none;background: transparent;margin:0 auto;" required>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                <input type="password" name="password1" id="password1" class="form-control" placeholder="Password" style="border: none;border-bottom:1px solid #000000;border-radius:0;-webkit-box-shadow: none;box-shadow: none;background: transparent;margin:0 auto;" required>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-6- col-xs-6 col-md-6 col-lg-6" id="sign_in_customer_div">
+                <button type="submit" class="btn btn-default" id="sign_in_customer">Submit</button>
+            </div>
+            <div class="col-sm-6- col-xs-6 col-md-6 col-lg-6" id="cancel_sign_in_customer_div">
+                <a href="@Url.Action("Index", "Home")" role="button" class="btn btn-default">
+                    Cancel
+                </a>
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+
+        <div class="col-sm-6- col-xs-6 col-md-6 col-lg-6" id="sign_in_customer_div">
+            <label>Register for new User</label><br />
+            <button type="button" class="btn btn-default" id="sign_in_customer"><a href="@Url.Action("Register", "Register")">Register</a></button>
+        </div>
+   
+
+    <br />
+    <br />
+}
+    <div class="row text-center">
+        <i style="align-content:center;"></i>
+    </div>
+    </div>
+    @if (ViewBag.singin_err != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.singin_err");
+            };
+        </script>
+    }

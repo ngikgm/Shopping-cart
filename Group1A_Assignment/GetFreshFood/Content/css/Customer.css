@@ -1,0 +1,57 @@
+﻿#sign_in_customer
+{
+    background-color:azure;
+    color:#623232;
+}
+
+#sign_in_customer:hover {
+    background-color: cornflowerblue;
+    color: azure;
+}
+
+#cancel_sign_in_customer {
+    background-color: azure;
+    color: #623232;
+}
+
+#cancel_sign_in_customer:hover {
+        background-color: cornflowerblue;
+        color: azure;
+}
+
+#sign_in_customer_div{
+    text-align:right;
+}
+
+#cancel_sign_in_customer_div{
+    text-align:left;
+}
+
+#sign_up_customer {
+    background-color: azure;
+    color: #623232;
+}
+
+    #sign_up_customer:hover {
+        background-color: cornflowerblue;
+        color: azure;
+    }
+
+
+#cancel_sign_up_customer {
+    background-color: azure;
+    color: #623232;
+}
+
+    #cancel_sign_up_customer:hover {
+        background-color: cornflowerblue;
+        color: azure;
+    }
+
+#sign_up_customer_div {
+    text-align: right;
+}
+
+#cancel_sign_up_customer_div {
+    text-align: left;
+}
